@@ -42,6 +42,9 @@ class App extends React.Component {
     this.numCols = 0;
     this.algo = null;
     this.state = {
+      selectorFlag: false,
+      sliderFlag: false,
+      algoSelected: "Select an Algorithm",
       data: {
         labels: [65, 123, 80, 181, 156, 55, 40, 2, 13, 97],
         datasets: [
@@ -60,25 +63,27 @@ class App extends React.Component {
 
   startSort() {
     console.log("Clicked on Visualize");
+    this.setState({ selectorFlag: true });
+    this.setState({ sliderFlag: true });
     if (this.numCols === 0) {
       this.numCols = 10;
     }
     if (this.algo === null) {
       this.algo = "QUICK";
     }
-    switch (this.algo) {
-      case "HEAP":
+    // switch (this.algo) {
+    //   case "HEAP":
 
-      case "SELECTION":
+    //   case "SELECTION":
 
-      case "MERGE":
+    //   case "MERGE":
 
-      case "BUBBLE":
+    //   case "BUBBLE":
 
-      case "INSERTION":
+    //   case "INSERTION":
 
-      case "QUICK":
-    }
+    //   case "QUICK":
+    // }
   }
 
   generateList(givenCols) {
@@ -109,6 +114,11 @@ class App extends React.Component {
     window.location.reload();
   }
 
+  handleSelectChange(changeEvent) {
+    console.log("Selected: ", changeEvent.target.value);
+    this.dropDownUpdate(changeEvent.target.value);
+    this.setState({ algoSelected: changeEvent.target.value });
+  }
   render() {
     return (
       <div align="center">
@@ -116,27 +126,29 @@ class App extends React.Component {
         <Select
           autoWidth={true}
           defaultValue={"QUICK"}
-          displayEmpty={true}
+          // displayEmpty={true}
           renderValue={() => {
-            return "Select an Algorithm";
+            return this.state.algoSelected;
           }}
+          value={this.state.algoSelected}
+          disabled={this.state.selectorFlag}
           onChange={(changeEvent, newValue) => {
-            console.log("Selected: ", changeEvent.target.value);
-            this.dropDownUpdate(changeEvent.target.value);
+            this.handleSelectChange(changeEvent);
           }}
         >
-          <MenuItem value={"HEAP"}>Heap Sort</MenuItem>
-          <MenuItem value={"QUICK"}>Quick Sort</MenuItem>
-          <MenuItem value={"MERGE"}>Merge Sort</MenuItem>
-          <MenuItem value={"SELECTION"}>Selection Sort</MenuItem>
-          <MenuItem value={"INSERTION"}>Insertion Sort</MenuItem>
-          <MenuItem value={"MERGE"}>Merge Sort </MenuItem>
+          <MenuItem value={"HEAP SORT"}>Heap Sort</MenuItem>
+          <MenuItem value={"QUICK SORT"}>Quick Sort</MenuItem>
+          <MenuItem value={"MERGE SORT"}>Merge Sort</MenuItem>
+          <MenuItem value={"SELECTION SORT"}>Selection Sort</MenuItem>
+          <MenuItem value={"INSERTION SORT"}>Insertion Sort</MenuItem>
+          <MenuItem value={"MERGE SORT"}>Merge Sort </MenuItem>
         </Select>
         <p>
           <b>Size:</b>
         </p>
         <Slider
           style={{ width: 300 }}
+          disabled={this.state.sliderFlag}
           step={5}
           defaultValue={10}
           max={100}
