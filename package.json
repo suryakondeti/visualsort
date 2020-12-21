@@ -1,0 +1,55 @@
+{
+  "name": "sorter",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "^4.11.2",
+    "@reach/slider": "^0.12.1",
+    "@shwilliam/react-rubber-slider": "^0.1.4",
+    "@testing-library/jest-dom": "^5.11.6",
+    "@testing-library/react": "^11.2.2",
+    "@testing-library/user-event": "^12.6.0",
+    "bootstrap": "^4.5.3",
+    "chart.js": "^2.9.4",
+    "d3": "^6.3.1",
+    "jquery": "^3.5.1",
+    "material-ui": "^0.20.2",
+    "nw-react-slider": "^2.0.1",
+    "popper.js": "^1.16.1",
+    "rc-slider": "^9.7.1",
+    "react": "^17.0.1",
+    "react-bar-chart": "^0.1.2",
+    "react-bootstrap-range-slider": "^2.0.2",
+    "react-chartjs-2": "^2.11.1",
+    "react-charts": "^2.0.0-beta.7",
+    "react-dom": "^17.0.1",
+    "react-dropdown": "^1.9.0",
+    "react-dynamic-charts": "^1.0.5",
+    "react-scripts": "4.0.1",
+    "web-vitals": "^0.2.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
