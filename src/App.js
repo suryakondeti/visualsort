@@ -144,7 +144,7 @@ class App extends React.Component {
       const colorArr = [];
       for (var j = 0; j < final_color_arr[i].length; j++) {
         if (final_color_arr[i][j] === 1) {
-          colorArr.push("rgb(0,158,192)");
+          colorArr.push("rgb(0,0,128)");
         } else if (final_color_arr[i][j] === 0) {
           colorArr.push("rgb(230,0,126)");
         } else if (final_color_arr[i][j] === 2) {
