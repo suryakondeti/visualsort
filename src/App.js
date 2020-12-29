@@ -43,7 +43,7 @@ class App extends React.Component {
         labels: [65, 123, 80, 181, 156, 55, 40, 2, 13, 97],
         datasets: [
           {
-            backgroundColor: "rgb(30,144,255)",
+            backgroundColor: "rgb(0,158,192)",
             borderWidth: 2,
             data: [65, 123, 80, 181, 156, 55, 40, 2, 13, 97],
           },
@@ -194,7 +194,7 @@ class App extends React.Component {
           <MenuItem value={"QUICK SORT"}>Quick Sort</MenuItem>
           <MenuItem value={"MERGE SORT"}>Merge Sort</MenuItem>
           <MenuItem value={"SELECTION SORT"}>Selection Sort</MenuItem>
-          <MenuItem value={"BUBBLE SORT"}>Bubble Sort </MenuItem>
+          <MenuItem value={"BUBBLE SORT"}>Bubble Sort</MenuItem>
         </Select>
         <br></br>
         <div style={{ display: "inline-block" }}>
