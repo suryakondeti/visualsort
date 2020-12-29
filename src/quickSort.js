@@ -22,7 +22,6 @@ function quickSort(array) {
   color_arr.push(2);
   color_arr = color_arr.concat(new Array(greaterArray.length).fill(1));
   final_color_arr.push(color_arr.slice());
-  console.log(color_arr);
   color_arr.fill(0);
   return resultArr;
 }

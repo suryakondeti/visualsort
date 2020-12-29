@@ -11,27 +11,10 @@ import { Slider } from "@material-ui/core";
 import { Select } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import bubbleSort from "./bubbleSort";
+import mergeSortHelper from "./mergeSort";
 
 Chart.defaults.global.legend.display = false;
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
-
-// enum Algo = {
-//   HEAP,
-//   SELECTION,
-//   BUBBLE,
-//   MERGE,
-//   QUICK,
-//   INSERTION
-// }
-
-// const options = [
-//   "Heap Sort",
-//   "Selection Sort",
-//   "Bubble Sort",
-//   "Merge Sort",
-//   "Quick Sort",
-//   "Insertion Sort",
-// ];
 
 class App extends React.Component {
   sizeSliderUpdate(newValue) {
@@ -81,10 +64,6 @@ class App extends React.Component {
       this.algo = "INSERTION SORT";
     }
     switch (this.algo) {
-      case "HEAP SORT":
-        console.log("HEAP ", this.numCols);
-        break;
-
       case "SELECTION SORT":
         console.log("SELECTION  ", this.numCols);
         [toSort, toColor] = selectionSort(this.numsToSort);
@@ -93,6 +72,8 @@ class App extends React.Component {
 
       case "MERGE SORT":
         console.log("MERGE ", this.numCols);
+        [toSort, toColor] = mergeSortHelper(this.numsToSort);
+        this.visualize(toSort, toColor);
         break;
 
       case "BUBBLE SORT":
@@ -110,7 +91,6 @@ class App extends React.Component {
 
       case "QUICK SORT":
         console.log("QUICK  ", this.numCols);
-        // [toSort, toColor] = quickSort(this.numsToSort);
         [toSort, toColor] = quickSortHelper(this.numsToSort);
         this.visualize(toSort, toColor);
         break;
@@ -121,6 +101,13 @@ class App extends React.Component {
   }
 
   visualize_helper(givenArr, colorArr) {
+    console.log(colorArr);
+    if (colorArr.length < givenArr.length) {
+      colorArr = colorArr.concat(
+        new Array(givenArr.length - colorArr.length).fill("rgb(255, 69, 0)")
+      );
+    }
+    console.log("new is ", colorArr);
     this.setState({
       data: {
         labels: givenArr,
@@ -147,7 +134,7 @@ class App extends React.Component {
           colorArr.push("rgb(0,0,128)");
         } else if (final_color_arr[i][j] === 0) {
           colorArr.push("rgb(230,0,126)");
-        } else if (final_color_arr[i][j] === 2) {
+        } else {
           colorArr.push("rgb(255,211,0)");
         }
       }
@@ -204,7 +191,6 @@ class App extends React.Component {
           }}
         >
           <MenuItem value={"INSERTION SORT"}>Insertion Sort</MenuItem>
-          <MenuItem value={"HEAP SORT"}>Heap Sort</MenuItem>
           <MenuItem value={"QUICK SORT"}>Quick Sort</MenuItem>
           <MenuItem value={"MERGE SORT"}>Merge Sort</MenuItem>
           <MenuItem value={"SELECTION SORT"}>Selection Sort</MenuItem>
