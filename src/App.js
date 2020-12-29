@@ -191,10 +191,10 @@ class App extends React.Component {
           }}
         >
           <MenuItem value={"INSERTION SORT"}>Insertion Sort</MenuItem>
-          <MenuItem value={"QUICK SORT"}>Quick Sort</MenuItem>
-          <MenuItem value={"MERGE SORT"}>Merge Sort</MenuItem>
           <MenuItem value={"SELECTION SORT"}>Selection Sort</MenuItem>
           <MenuItem value={"BUBBLE SORT"}>Bubble Sort</MenuItem>
+          <MenuItem value={"QUICK SORT"}>Quick Sort</MenuItem>
+          <MenuItem value={"MERGE SORT"}>Merge Sort</MenuItem>
         </Select>
         <br></br>
         <div style={{ display: "inline-block" }}>
