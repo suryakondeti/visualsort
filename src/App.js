@@ -10,6 +10,7 @@ import quickSortHelper from "./quickSort";
 import { Slider } from "@material-ui/core";
 import { Select } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
+import bubbleSort from "./bubbleSort";
 
 Chart.defaults.global.legend.display = false;
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
@@ -96,6 +97,8 @@ class App extends React.Component {
 
       case "BUBBLE SORT":
         console.log("BUBBLE ", this.numCols);
+        [toSort, toColor] = bubbleSort(this.numsToSort);
+        this.visualize(toSort, toColor);
         break;
 
       case "INSERTION SORT":
@@ -205,7 +208,7 @@ class App extends React.Component {
           <MenuItem value={"QUICK SORT"}>Quick Sort</MenuItem>
           <MenuItem value={"MERGE SORT"}>Merge Sort</MenuItem>
           <MenuItem value={"SELECTION SORT"}>Selection Sort</MenuItem>
-          <MenuItem value={"MERGE SORT"}>Merge Sort </MenuItem>
+          <MenuItem value={"BUBBLE SORT"}>Bubble Sort </MenuItem>
         </Select>
         <p>
           <b>Array length:</b>
