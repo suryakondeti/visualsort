@@ -18,11 +18,17 @@ function quickSort(array) {
   }
   var resultArr = quickSort(lesserArray).concat(pivot, quickSort(greaterArray));
   final_arr.push(Array.from(resultArr));
+  var color_arr = new Array(lesserArray.length).fill(0);
+  color_arr.push(2);
+  color_arr = color_arr.concat(new Array(greaterArray.length).fill(1));
+  final_color_arr.push(color_arr.slice());
+  console.log(color_arr);
+  color_arr.fill(0);
   return resultArr;
 }
 
 function quickSortHelper(array) {
   quickSort(array);
-  return final_arr;
+  return [final_arr, final_color_arr];
 }
 export default quickSortHelper;

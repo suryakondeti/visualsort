@@ -33,9 +33,14 @@ const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 // ];
 
 class App extends React.Component {
-  sliderUpdate(newValue) {
+  sizeSliderUpdate(newValue) {
     this.numCols = newValue;
     this.generateList(this.numCols);
+  }
+  speedSliderUpdate(newValue) {
+    console.log(this.speed);
+    this.speed = -196 * newValue + 1980;
+    console.log(this.speed);
   }
   dropDownUpdate(newValue) {
     this.algo = newValue;
@@ -44,6 +49,7 @@ class App extends React.Component {
     super(props);
     this.numsToSort = [65, 123, 80, 181, 156, 55, 40, 2, 13, 97];
     this.numCols = 0;
+    this.speed = 1000;
     this.algo = null;
     this.state = {
       selectorFlag: false,
@@ -102,8 +108,8 @@ class App extends React.Component {
       case "QUICK SORT":
         console.log("QUICK  ", this.numCols);
         // [toSort, toColor] = quickSort(this.numsToSort);
-        toSort = quickSortHelper(this.numsToSort);
-        this.visualize(toSort, null);
+        [toSort, toColor] = quickSortHelper(this.numsToSort);
+        this.visualize(toSort, toColor);
         break;
 
       default: {
@@ -111,7 +117,7 @@ class App extends React.Component {
     }
   }
 
-  visualize_helper(givenArr, colorArr = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]) {
+  visualize_helper(givenArr, colorArr) {
     this.setState({
       data: {
         labels: givenArr,
@@ -132,16 +138,18 @@ class App extends React.Component {
         final_color_arr = [];
         final_color_arr[i] = new Array(final_arr.length).fill(0);
       }
-      // const colorArr = [];
-      // for (var j = 0; j < final_color_arr[i].length; j++) {
-      //   if (final_color_arr[i][j] !== 1) {
-      //     colorArr.push("rgb(0,158,192)");
-      //   } else {
-      //     colorArr.push("rgb(230,0,126)");
-      //   }
-      // }
-      this.visualize_helper(final_arr[i]); //, colorArr);
-      await delay(1000);
+      const colorArr = [];
+      for (var j = 0; j < final_color_arr[i].length; j++) {
+        if (final_color_arr[i][j] === 1) {
+          colorArr.push("rgb(0,158,192)");
+        } else if (final_color_arr[i][j] === 0) {
+          colorArr.push("rgb(230,0,126)");
+        } else if (final_color_arr[i][j] === 2) {
+          colorArr.push("rgb(255,211,0)");
+        }
+      }
+      this.visualize_helper(final_arr[i], colorArr);
+      await delay(this.speed);
     }
     // this.setState({ selectorFlag: false });
     // this.setState({ sliderFlag: false });
@@ -200,7 +208,7 @@ class App extends React.Component {
           <MenuItem value={"MERGE SORT"}>Merge Sort </MenuItem>
         </Select>
         <p>
-          <b>Size:</b>
+          <b>Array length:</b>
         </p>
         <Slider
           style={{ width: 300 }}
@@ -211,7 +219,22 @@ class App extends React.Component {
           min={5}
           valueLabelDisplay={"on"}
           onChange={(changeEvent, newValue) => {
-            this.sliderUpdate(newValue);
+            this.sizeSliderUpdate(newValue);
+          }}
+        />
+        <p>
+          <b>Sorting speed:</b>
+        </p>
+        <Slider
+          style={{ width: 300 }}
+          disabled={this.state.sliderFlag}
+          step={1}
+          defaultValue={5}
+          max={10}
+          min={1}
+          valueLabelDisplay={"off"}
+          onChange={(changeEvent, newValue) => {
+            this.speedSliderUpdate(newValue);
           }}
         />
         <br></br>
@@ -236,8 +259,6 @@ class App extends React.Component {
         >
           Reset
         </Button>
-        <br></br>
-        <br></br>
         <Bar
           width={300}
           height={100}
