@@ -291,6 +291,7 @@ class App extends React.Component {
         <br></br>
         <p
           style={{
+            fontSize: 12,
             align: "center",
           }}
         >
