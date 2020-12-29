@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Dropdown from "react-dropdown";
 import App from "./App";
-import { Select } from "@material-ui/core";
 
 const options = [
   "Heap Sort",

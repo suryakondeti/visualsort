@@ -4,11 +4,15 @@ import { Bar } from "react-chartjs-2";
 import Chart from "chart.js";
 import "react-dropdown/style.css";
 import MenuItem from "@material-ui/core/MenuItem";
+import insertionSort from "./insertionSort";
+import selectionSort from "./selectionSort";
+import quickSortHelper from "./quickSort";
 import { Slider } from "@material-ui/core";
 import { Select } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 
 Chart.defaults.global.legend.display = false;
+const delay = (ms) => new Promise((res) => setTimeout(res, ms));
 
 // enum Algo = {
 //   HEAP,
@@ -19,41 +23,38 @@ Chart.defaults.global.legend.display = false;
 //   INSERTION
 // }
 
-const options = [
-  "Heap Sort",
-  "Selection Sort",
-  "Bubble Sort",
-  "Merge Sort",
-  "Quick Sort",
-  "Insertion Sort",
-];
+// const options = [
+//   "Heap Sort",
+//   "Selection Sort",
+//   "Bubble Sort",
+//   "Merge Sort",
+//   "Quick Sort",
+//   "Insertion Sort",
+// ];
 
 class App extends React.Component {
   sliderUpdate(newValue) {
     this.numCols = newValue;
-    console.log("Slider Updated");
+    this.generateList(this.numCols);
   }
   dropDownUpdate(newValue) {
     this.algo = newValue;
-    console.log("DropDown Updated");
   }
   constructor(props) {
     super(props);
+    this.numsToSort = [65, 123, 80, 181, 156, 55, 40, 2, 13, 97];
     this.numCols = 0;
     this.algo = null;
     this.state = {
       selectorFlag: false,
       sliderFlag: false,
-      algoSelected: "Select an Algorithm",
+      algoSelected: "INSERTION SORT",
       data: {
         labels: [65, 123, 80, 181, 156, 55, 40, 2, 13, 97],
         datasets: [
           {
-            backgroundColor: "rgba(255,99,132,0.2)",
-            borderColor: "rgba(255,99,132,1)",
+            backgroundColor: "rgb(0,158,192)",
             borderWidth: 2,
-            hoverBackgroundColor: "rgba(255,99,132,0.4)",
-            hoverBorderColor: "rgba(255,99,132,1)",
             data: [65, 123, 80, 181, 156, 55, 40, 2, 13, 97],
           },
         ],
@@ -62,46 +63,104 @@ class App extends React.Component {
   }
 
   startSort() {
-    console.log("Clicked on Visualize");
+    var toSort;
+    var toColor;
     this.setState({ selectorFlag: true });
     this.setState({ sliderFlag: true });
     if (this.numCols === 0) {
       this.numCols = 10;
     }
     if (this.algo === null) {
-      this.algo = "QUICK";
+      this.algo = "INSERTION SORT";
     }
-    // switch (this.algo) {
-    //   case "HEAP":
+    switch (this.algo) {
+      case "HEAP SORT":
+        console.log("HEAP ", this.numCols);
+        break;
 
-    //   case "SELECTION":
+      case "SELECTION SORT":
+        console.log("SELECTION  ", this.numCols);
+        [toSort, toColor] = selectionSort(this.numsToSort);
+        this.visualize(toSort, toColor);
+        break;
 
-    //   case "MERGE":
+      case "MERGE SORT":
+        console.log("MERGE ", this.numCols);
+        break;
 
-    //   case "BUBBLE":
+      case "BUBBLE SORT":
+        console.log("BUBBLE ", this.numCols);
+        break;
 
-    //   case "INSERTION":
+      case "INSERTION SORT":
+        console.log("INSERTION ", this.numCols);
+        console.log(this.numsToSort);
+        [toSort, toColor] = insertionSort(this.numsToSort);
+        this.visualize(toSort, toColor);
+        break;
 
-    //   case "QUICK":
-    // }
+      case "QUICK SORT":
+        console.log("QUICK  ", this.numCols);
+        // [toSort, toColor] = quickSort(this.numsToSort);
+        toSort = quickSortHelper(this.numsToSort);
+        this.visualize(toSort, null);
+        break;
+
+      default: {
+      }
+    }
+  }
+
+  visualize_helper(givenArr, colorArr = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]) {
+    this.setState({
+      data: {
+        labels: givenArr,
+        datasets: [
+          {
+            backgroundColor: colorArr,
+            borderWidth: 2,
+            data: givenArr,
+          },
+        ],
+      },
+    });
+  }
+
+  async visualize(final_arr, final_color_arr) {
+    for (var i = 0; i < final_arr.length; i++) {
+      if (final_color_arr === null) {
+        final_color_arr = [];
+        final_color_arr[i] = new Array(final_arr.length).fill(0);
+      }
+      // const colorArr = [];
+      // for (var j = 0; j < final_color_arr[i].length; j++) {
+      //   if (final_color_arr[i][j] !== 1) {
+      //     colorArr.push("rgb(0,158,192)");
+      //   } else {
+      //     colorArr.push("rgb(230,0,126)");
+      //   }
+      // }
+      this.visualize_helper(final_arr[i]); //, colorArr);
+      await delay(1000);
+    }
+    // this.setState({ selectorFlag: false });
+    // this.setState({ sliderFlag: false });
   }
 
   generateList(givenCols) {
-    var randomArray = [];
+    const randomArray = [];
     while (randomArray.length < givenCols) {
       var r = Math.floor(Math.random() * 250) + 1;
       if (randomArray.indexOf(r) === -1) randomArray.push(r);
     }
+    this.numsToSort = randomArray;
     this.setState({
       data: {
         labels: randomArray,
         datasets: [
           {
-            backgroundColor: "rgba(255,99,132,0.2)",
-            borderColor: "rgba(255,99,132,1)",
+            backgroundColor: "rgb(0,158,192)",
             borderWidth: 2,
-            hoverBackgroundColor: "rgba(255,99,132,0.4)",
-            hoverBorderColor: "rgba(255,99,132,1)",
             data: randomArray,
           },
         ],
@@ -110,12 +169,10 @@ class App extends React.Component {
   }
 
   reset() {
-    console.log("Clicked on Abort/Reset");
     window.location.reload();
   }
 
   handleSelectChange(changeEvent) {
-    console.log("Selected: ", changeEvent.target.value);
     this.dropDownUpdate(changeEvent.target.value);
     this.setState({ algoSelected: changeEvent.target.value });
   }
@@ -125,8 +182,7 @@ class App extends React.Component {
         <br></br>
         <Select
           autoWidth={true}
-          defaultValue={"QUICK"}
-          // displayEmpty={true}
+          defaultValue={"INSERTION SORT"}
           renderValue={() => {
             return this.state.algoSelected;
           }}
@@ -136,11 +192,11 @@ class App extends React.Component {
             this.handleSelectChange(changeEvent);
           }}
         >
+          <MenuItem value={"INSERTION SORT"}>Insertion Sort</MenuItem>
           <MenuItem value={"HEAP SORT"}>Heap Sort</MenuItem>
           <MenuItem value={"QUICK SORT"}>Quick Sort</MenuItem>
           <MenuItem value={"MERGE SORT"}>Merge Sort</MenuItem>
           <MenuItem value={"SELECTION SORT"}>Selection Sort</MenuItem>
-          <MenuItem value={"INSERTION SORT"}>Insertion Sort</MenuItem>
           <MenuItem value={"MERGE SORT"}>Merge Sort </MenuItem>
         </Select>
         <p>
@@ -156,7 +212,6 @@ class App extends React.Component {
           valueLabelDisplay={"on"}
           onChange={(changeEvent, newValue) => {
             this.sliderUpdate(newValue);
-            this.generateList(this.numCols);
           }}
         />
         <br></br>
