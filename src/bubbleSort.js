@@ -5,7 +5,7 @@ var temp;
 function bubbleSort(givenArr) {
   const color_arr = new Array(givenArr.length).fill(0);
   var numSwaps = 1;
-  while (numSwaps != 0) {
+  while (numSwaps !== 0) {
     numSwaps = 0;
     for (var i = 0; i < givenArr.length - 1; i++) {
       if (givenArr[i] > givenArr[i + 1]) {

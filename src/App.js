@@ -43,7 +43,7 @@ class App extends React.Component {
         labels: [65, 123, 80, 181, 156, 55, 40, 2, 13, 97],
         datasets: [
           {
-            backgroundColor: "rgb(0,158,192)",
+            backgroundColor: "rgb(30,144,255)",
             borderWidth: 2,
             data: [65, 123, 80, 181, 156, 55, 40, 2, 13, 97],
           },
@@ -196,36 +196,42 @@ class App extends React.Component {
           <MenuItem value={"SELECTION SORT"}>Selection Sort</MenuItem>
           <MenuItem value={"BUBBLE SORT"}>Bubble Sort </MenuItem>
         </Select>
-        <p>
-          <b>Array length:</b>
-        </p>
-        <Slider
-          style={{ width: 300 }}
-          disabled={this.state.sliderFlag}
-          step={5}
-          defaultValue={10}
-          max={100}
-          min={5}
-          valueLabelDisplay={"on"}
-          onChange={(changeEvent, newValue) => {
-            this.sizeSliderUpdate(newValue);
-          }}
-        />
-        <p>
-          <b>Sorting speed:</b>
-        </p>
-        <Slider
-          style={{ width: 300 }}
-          disabled={this.state.sliderFlag}
-          step={1}
-          defaultValue={5}
-          max={10}
-          min={1}
-          valueLabelDisplay={"off"}
-          onChange={(changeEvent, newValue) => {
-            this.speedSliderUpdate(newValue);
-          }}
-        />
+        <br></br>
+        <div style={{ display: "inline-block" }}>
+          <p>
+            <b>Array length:</b>
+          </p>
+          <Slider
+            style={{ width: 300 }}
+            disabled={this.state.sliderFlag}
+            step={5}
+            defaultValue={10}
+            max={100}
+            min={5}
+            valueLabelDisplay={"on"}
+            onChange={(changeEvent, newValue) => {
+              this.sizeSliderUpdate(newValue);
+            }}
+          />
+        </div>
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+        <div style={{ display: "inline-block" }}>
+          <p>
+            <b>Sorting speed:</b>
+          </p>
+          <Slider
+            style={{ width: 300 }}
+            disabled={this.state.sliderFlag}
+            step={1}
+            defaultValue={5}
+            max={10}
+            min={1}
+            valueLabelDisplay={"off"}
+            onChange={(changeEvent, newValue) => {
+              this.speedSliderUpdate(newValue);
+            }}
+          />
+        </div>
         <br></br>
         <Button
           variant="contained"
