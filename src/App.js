@@ -287,7 +287,13 @@ class App extends React.Component {
           }}
           data={this.state.data}
         />
-        <p align="center">
+        <br></br>
+        <br></br>
+        <p
+          style={{
+            align: "center",
+          }}
+        >
           Source code available &#8239;
           <a href="https://github.com/suryakondeti/visualsort">here</a>
           &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
