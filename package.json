@@ -26,6 +26,7 @@
     "react-dom": "^17.0.1",
     "react-dropdown": "^1.9.0",
     "react-dynamic-charts": "^1.0.5",
+    "react-footer-comp": "^3.0.1",
     "react-scripts": "4.0.1",
     "web-vitals": "^0.2.4"
   },

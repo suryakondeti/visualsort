@@ -12,6 +12,7 @@ import { Select } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import bubbleSort from "./bubbleSort";
 import mergeSortHelper from "./mergeSort";
+import ReactFooter from "react-footer-comp";
 
 Chart.defaults.global.legend.display = false;
 const delay = (ms) => new Promise((res) => setTimeout(res, ms));
@@ -178,24 +179,27 @@ class App extends React.Component {
     return (
       <div align="center">
         <br></br>
-        <Select
-          autoWidth={true}
-          defaultValue={"INSERTION SORT"}
-          renderValue={() => {
-            return this.state.algoSelected;
-          }}
-          value={this.state.algoSelected}
-          disabled={this.state.selectorFlag}
-          onChange={(changeEvent, newValue) => {
-            this.handleSelectChange(changeEvent);
-          }}
-        >
-          <MenuItem value={"INSERTION SORT"}>Insertion Sort</MenuItem>
-          <MenuItem value={"SELECTION SORT"}>Selection Sort</MenuItem>
-          <MenuItem value={"BUBBLE SORT"}>Bubble Sort</MenuItem>
-          <MenuItem value={"QUICK SORT"}>Quick Sort</MenuItem>
-          <MenuItem value={"MERGE SORT"}>Merge Sort</MenuItem>
-        </Select>
+        <div style={{ display: "inline-block" }}>
+          <b>Select Algorithm:</b> &nbsp; &nbsp;
+          <Select
+            autoWidth={true}
+            defaultValue={"INSERTION SORT"}
+            renderValue={() => {
+              return this.state.algoSelected;
+            }}
+            value={this.state.algoSelected}
+            disabled={this.state.selectorFlag}
+            onChange={(changeEvent, newValue) => {
+              this.handleSelectChange(changeEvent);
+            }}
+          >
+            <MenuItem value={"INSERTION SORT"}>Insertion Sort</MenuItem>
+            <MenuItem value={"SELECTION SORT"}>Selection Sort</MenuItem>
+            <MenuItem value={"BUBBLE SORT"}>Bubble Sort</MenuItem>
+            <MenuItem value={"QUICK SORT"}>Quick Sort</MenuItem>
+            <MenuItem value={"MERGE SORT"}>Merge Sort</MenuItem>
+          </Select>
+        </div>
         <br></br>
         <div style={{ display: "inline-block" }}>
           <p>
@@ -283,6 +287,20 @@ class App extends React.Component {
           }}
           data={this.state.data}
         />
+        <p align="center">
+          Source code available &#8239;
+          <a href="https://github.com/suryakondeti/visualsort">here</a>
+          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+          Questions/concerns/suggestions? &#8239;
+          <a href="mailto: suryapkondeti@gmail.com">Drop me an email</a>
+        </p>
+        {/* <ReactFooter
+          height={25}
+          bgColor="#ffffff"
+          text={
+            
+          }
+        ></ReactFooter> */}
       </div>
     );
   }
