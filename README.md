@@ -1,5 +1,5 @@
 
-This App is publicly available at https://suryakondeti.github.io/visualsort/
+# This App is publicly available at https://suryakondeti.github.io/visualsort/
 
 
 # Getting Started with Create React App
