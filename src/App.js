@@ -178,6 +178,7 @@ class App extends React.Component {
   render() {
     return (
       <div align="center">
+        <meta property="og:image" content="%PUBLIC_URL%/visualsort.JPG" />
         <br></br>
         <div style={{ display: "inline-block" }}>
           <b>Select Algorithm:</b> &nbsp; &nbsp;
