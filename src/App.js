@@ -295,9 +295,9 @@ class App extends React.Component {
             align: "center",
           }}
         >
-          Source code available &#8239;
-          <a href="https://github.com/suryakondeti/visualsort">here</a>
-          <br></br>
+//           Source code available &#8239;
+//           <a href="https://github.com/suryakondeti/visualsort">here</a>
+//           <br></br>
           Questions/concerns/suggestions? &#8239;
           <a href="mailto: suryapkondeti@gmail.com">Drop me an email</a>
         </p>
