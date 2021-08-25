@@ -5,6 +5,6 @@
 
 To Run this App on your local machine, checkout this branch, run the following command
 
-"npm start" (without quotes)
+"npm start" 
 
 and visit http://localhost:3000 on your browser
